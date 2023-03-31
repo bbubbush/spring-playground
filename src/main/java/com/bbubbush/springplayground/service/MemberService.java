@@ -6,11 +6,17 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 @Transactional
 public class MemberService {
   private final MemberRepository memberRepository;
+  public List<Member> findAll() {
+    return memberRepository.findAll();
+  }
+
   public Member findMemberById(Long id) {
     return memberRepository.findById(id)
       .orElse(Member.builder().build());
