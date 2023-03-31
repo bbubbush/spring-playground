@@ -7,6 +7,9 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Getter
 @NoArgsConstructor
@@ -16,6 +19,9 @@ public class Member {
   private String name;
   @Enumerated(EnumType.STRING)
   private MemberGrade grade;
+
+  @OneToMany(mappedBy = "orderId")
+  private List<Order> orders = new ArrayList<>();
 
   @Builder
   public Member(String name) {
