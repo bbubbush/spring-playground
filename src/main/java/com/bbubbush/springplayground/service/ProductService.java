@@ -24,10 +24,11 @@ public class ProductService {
       .orElse(Product.builder().build());
   }
 
-  public Product save(String name, Category category) {
+  public Product save(String name, Long price, Category category) {
     return productRepository.save(
       Product.builder()
         .name(name)
+        .price(price)
         .category(category)
         .build());
   }

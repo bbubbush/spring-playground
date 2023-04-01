@@ -15,12 +15,13 @@ import java.util.List;
 @NoArgsConstructor
 public class Member {
   @Id @GeneratedValue
+  @Column(name = "member_id")
   private Long id;
   private String name;
   @Enumerated(EnumType.STRING)
   private MemberGrade grade;
 
-  @OneToMany(mappedBy = "orderId")
+  @OneToMany(mappedBy = "member")
   private List<Order> orders = new ArrayList<>();
 
   @Builder
