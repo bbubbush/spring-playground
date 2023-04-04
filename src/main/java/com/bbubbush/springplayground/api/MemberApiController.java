@@ -21,15 +21,13 @@ public class MemberApiController {
   public List<MemberResDto> findAll() {
     return memberService.findAll()
       .stream()
-      .map(Member::toMemberResDto)
+      .map(MemberResDto::new)
       .collect(Collectors.toList());
   }
 
   @GetMapping("/{id}")
   public MemberResDto findMemberById(@PathVariable Long id) {
-    return memberService.findMemberById(id)
-      .toMemberResDto();
+    final Member findMember = memberService.findMemberById(id);
+    return new MemberResDto(findMember);
   }
-
-
 }

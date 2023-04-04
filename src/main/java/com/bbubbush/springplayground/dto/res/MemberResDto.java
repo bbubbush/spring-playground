@@ -1,13 +1,20 @@
 package com.bbubbush.springplayground.dto.res;
 
-import com.bbubbush.springplayground.enums.MemberGrade;
-import lombok.Builder;
+import com.bbubbush.springplayground.entity.Member;
+import com.bbubbush.springplayground.enums.Position;
 import lombok.Getter;
 
 @Getter
-@Builder
 public class MemberResDto {
-  private Long id;
-  private String name;
-  private MemberGrade grade;
+  private final Long id;
+  private final String name;
+  private final Position position;
+  private final TeamResDto team;
+
+  public MemberResDto(Member member) {
+    this.id = member.getId();
+    this.name = member.getName();
+    this.position = member.getPosition();
+    this.team = new TeamResDto(member.getTeam());
+  }
 }
