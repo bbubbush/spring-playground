@@ -1,6 +1,7 @@
 package com.bbubbush.springplayground.service;
 
 import com.bbubbush.springplayground.entity.Member;
+import com.bbubbush.springplayground.enums.Position;
 import com.bbubbush.springplayground.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -22,10 +23,11 @@ public class MemberService {
       .orElse(Member.builder().build());
   }
 
-  public Member save(String name) {
+  public Member save(String name, Position position) {
     return memberRepository.save(
       Member.builder()
         .name(name)
+        .position(position)
         .build());
   }
 }

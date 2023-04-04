@@ -1,10 +1,10 @@
 package com.bbubbush.springplayground.repository;
 
-import com.bbubbush.springplayground.entity.Product;
+import com.bbubbush.springplayground.entity.Team;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ProductRepository extends JpaRepository<Product, Long> {
+public interface TeamRepository extends JpaRepository<Team, Long> {
 
 }
