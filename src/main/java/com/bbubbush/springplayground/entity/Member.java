@@ -1,14 +1,10 @@
 package com.bbubbush.springplayground.entity;
 
-import com.bbubbush.springplayground.dto.res.MemberResDto;
-import com.bbubbush.springplayground.enums.MemberGrade;
+import com.bbubbush.springplayground.enums.Position;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Getter
@@ -19,22 +15,30 @@ public class Member {
   private Long id;
   private String name;
   @Enumerated(EnumType.STRING)
-  private MemberGrade grade;
+  private Position position;
 
-  @OneToMany(mappedBy = "member")
-  private List<Order> orders = new ArrayList<>();
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "team_id")
+  private Team team;
 
   @Builder
-  public Member(String name) {
+  public Member(String name, Position position, Team team) {
     this.name = name;
-    this.grade = MemberGrade.NONE;
+    this.position = position;
+    this.team = team;
   }
 
-  public MemberResDto toMemberResDto() {
-     return MemberResDto.builder()
-       .id(this.id)
-       .name(this.name)
-       .grade(this.grade)
-       .build();
+//  public MemberResDto toMemberResDto() {
+//     return MemberResDto.builder()
+//       .id(this.id)
+//       .name(this.name)
+//       .position(this.position)
+//       .team(this.team)
+//       .build();
+//  }
+
+  public void addTeam(Team team) {
+    this.team = team;
+    team.getMembers().add(this);
   }
 }
